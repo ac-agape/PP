@@ -22,6 +22,7 @@ fun main(args: Array<String>) {
         else -> {
             System.out.printf("Error! operator is not correct")
             return
+            
         }
     }
 
