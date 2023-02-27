@@ -7,7 +7,39 @@ from tkinter import *
 # globally declare the expression variable
 expression = ""
 
+def addToken(expression):
+    lista = []
+    i = 0
+    while i < len(expression):
+        text = expression[i]
+        if text == '+':
+            lista.append({"type": "+", "order": 1})
+            i = i + 1
+        elif text == '-':
+            lista.append({"type": "-", "order": 1})
+            i = i + 1
+        elif text == '*':
+            lista.append({"type": "*", "order": 2})
+            i = i + 1
+        elif text == '/':
+            lista.append({"type": "/", "order": 2})
+            i = i + 1
+        elif text == '(':
+            lista.append({"type": "(", "order": None})
+            i = i + 1
+        elif text == ')':
+            lista.append({"type": ")", "order": None})
+            i = i + 1
+        elif text.isdigit():
+            number_start = i
+            while i < len(expression) and expression[i].isdigit():
+                i += 1
+            lista.append(
+                {"type": "number", "order": 0, "val": int(expression[number_start:i])}
+            )
 
+
+    return lista
 # Function to update expression
 # in the text entry box
 def press(num):
@@ -27,12 +59,13 @@ def equalpress():
     # for handling the errors like zero
     # division error etc.
 
+    global expression
+    chestie = addToken(expression)
+    print(chestie)
+
     # Put that code inside the try block
     # which may generate the error
     try:
-
-        global expression
-
         # eval function evaluate the expression
         # and str function convert the result
         # into string
@@ -72,7 +105,7 @@ if __name__ == "__main__":
     gui.title("Simple Calculator")
 
     # set the configuration of GUI window
-    gui.geometry("340x140")
+    gui.geometry("420x140")
 
     # StringVar() is the variable class
     # we create an instance of this class
