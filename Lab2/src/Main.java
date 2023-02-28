@@ -40,8 +40,20 @@ class Main {
         return rez;
     }
 
+    private static String stringCRC(String token){
+        int len = token.length()-1;
+        if(len <=2){
+            return "0";
+        }
+        String rez = token.substring(1, token.length()-1);
+        return rez;
+    }
+
     //functia MAIN
     public static void main(String[] args) {
+        String ceva = "test";
+        System.out.println(stringCRC(ceva));
+        System.out.println(SumCRC(stringCRC(ceva)));
         //construim un context pentru evaluare elemente JS
         Context polyglot = Context.create();
         //construim un array de string-uri, folosind cuvinte din pagina web:  https://chrisseaton.com/truffleruby/tenthings/
@@ -52,7 +64,8 @@ class Main {
             String upper = RToUpper(element);
             int crc = SumCRC(upper);
             int policrc = polinomCRC(crc);
-            System.out.println(upper + " -> " + crc + " -> " + policrc);
+            int substringcrc = SumCRC(stringCRC(upper));
+            System.out.println(upper + " -> " + crc + " -> " + policrc + " -> " + substringcrc);
         }
         // inchidem contextul Polyglot
         polyglot.close();
