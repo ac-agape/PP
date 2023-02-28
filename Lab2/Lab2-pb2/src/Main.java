@@ -22,8 +22,19 @@ class Main {
         return lista; //return
     }
 
+    static void afisare (List<Integer> list){
+        Context polyglot = Context.newBuilder().allowAllAccess(true).build();
+
+        for(int i = 0; i<20; ++i) {
+            polyglot.eval("js", "console.log(" + list.get(i) + ")");
+        }
+        polyglot.close();
+    }
+
     public static void main(String[] args) {
         List<Integer> lista;
         lista = Generare(20);
+        afisare(lista);
     }
+
 }
