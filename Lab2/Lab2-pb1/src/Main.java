@@ -1,5 +1,6 @@
 //import libraria principala polyglot din graalvm
 import org.graalvm.polyglot.*;
+import java.util.*;
 
 //clasa principala - aplicatie JAVA
 class Main {
@@ -51,14 +52,14 @@ class Main {
 
     //functia MAIN
     public static void main(String[] args) {
-        String ceva = "test";
-        System.out.println(stringCRC(ceva));
-        System.out.println(SumCRC(stringCRC(ceva)));
         //construim un context pentru evaluare elemente JS
         Context polyglot = Context.create();
         //construim un array de string-uri, folosind cuvinte din pagina web:  https://chrisseaton.com/truffleruby/tenthings/
-        Value array = polyglot.eval("js", "[\"good\",\"morning\",\"sunshine\",\"i\",\"like\", \"your\", \"face\"];");
+        Value array = polyglot.eval("js", "[\"good\",\"morning\",\"sunshine\",\"i\",\"like\", \"your\", \"lkie\"];");
         //pentru fiecare cuvant, convertim la upcase folosind R si calculam suma de control folosind PYTHON
+        HashMap<Integer, ArrayList<String>> words = new HashMap<>(); // tablou de dispersie pt sumele de control si cuvintele respective
+
+
         for (int i = 0; i < array.getArraySize();i++){
             String element = array.getArrayElement(i).asString();
             String upper = RToUpper(element);
@@ -66,7 +67,28 @@ class Main {
             int policrc = polinomCRC(crc);
             int substringcrc = SumCRC(stringCRC(upper));
             System.out.println(upper + " -> " + crc + " -> " + policrc + " -> " + substringcrc);
+
+            ArrayList<String> rep_list;
+            if (words.containsKey(crc)) { // caz deja exista acea suma de control
+                rep_list = words.get(crc); // salvez lista existenta
+            }
+            else {
+                rep_list = new ArrayList<>(); // creez o lista noua
+            }
+            rep_list.add(upper); // actualizarea listei
+            words.put(crc, rep_list); // adaug lista in tabloul de dispersie
         }
+
+        //afisare
+        for(Integer i : words.keySet()) {
+            ArrayList<String> rep_words = words.get(i);
+            System.out.printf("%d -> [", i);
+            for(String word : rep_words){
+                System.out.printf("%s ", word);
+            }
+            System.out.println("]");
+        }
+
         // inchidem contextul Polyglot
         polyglot.close();
     }
