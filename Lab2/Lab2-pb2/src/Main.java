@@ -37,7 +37,7 @@ class Main {
         Value result = polyglot.eval("R", """
         test2 <- function(list){
             sort(list)
-            list    
+            list   
         }""").execute(list);
         ArrayList<Integer> ord_list = new ArrayList<Integer>();
         if (result.hasArrayElements()) {
