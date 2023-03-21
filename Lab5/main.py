@@ -23,6 +23,10 @@ class Parser:
                                       text="Filter Odd",
                                       command=self.filter_odd)
 
+        self.filter_primes_btn = tk.Button(master=self.gui,
+                                           text="Filter Primes",
+                                           command=self.filter_primes)
+
         self.result_text = tk.Text(master=self.gui, width=50, height=10)
 
         self.integer_list_text = tk.Text(self.gui, width=50, height=1)
@@ -34,6 +38,7 @@ class Parser:
         self.add_list_btn.grid(row=0, column=2)
         self.filter_odd_btn.grid(row=1, column=2)
         self.result_text.grid(row=1, column=1)
+        self.filter_primes_btn.grid(row=2, column=2)
         
         self.integer_list = []
         self.result_text.insert('1.0', 'Result...')
@@ -50,6 +55,11 @@ class Parser:
     def filter_odd(self):
         self.result_text.delete(1.0, 3.0)
         self.result_text.insert('1.0', list(filter(lambda x: x % 2 == 1, self.integer_list)))
+
+    def filter_primes(self):
+        self.result_text.delete(1.0, 3.0)
+        self.result_text.insert('1.0', list(
+            filter(lambda number: all(number % i != 0 for i in range(2, int(number ** .5) + 1)), self.integer_list)))
 
 if __name__ == '__main__':
     root = tk.Tk()
