@@ -1,5 +1,6 @@
 import os
 import tkinter as tk
+from functools import reduce
 
 class Parser:
     ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -27,6 +28,10 @@ class Parser:
                                            text="Filter Primes",
                                            command=self.filter_primes)
 
+        self.sum_numbers_btn = tk.Button(master=self.gui,
+                                         text="Sum Numbers",
+                                         command=self.sum_numbers)
+
         self.result_text = tk.Text(master=self.gui, width=50, height=10)
 
         self.integer_list_text = tk.Text(self.gui, width=50, height=1)
@@ -39,7 +44,8 @@ class Parser:
         self.filter_odd_btn.grid(row=1, column=2)
         self.result_text.grid(row=1, column=1)
         self.filter_primes_btn.grid(row=2, column=2)
-        
+        self.sum_numbers_btn.grid(row=3, column=2)
+
         self.integer_list = []
         self.result_text.insert('1.0', 'Result...')
 
@@ -60,6 +66,10 @@ class Parser:
         self.result_text.delete(1.0, 3.0)
         self.result_text.insert('1.0', list(
             filter(lambda number: all(number % i != 0 for i in range(2, int(number ** .5) + 1)), self.integer_list)))
+
+    def sum_numbers(self):
+        self.result_text.delete(1.0, 3.0)
+        self.result_text.insert('1.0', reduce(lambda x, y: x + y, self.integer_list))
 
 if __name__ == '__main__':
     root = tk.Tk()
