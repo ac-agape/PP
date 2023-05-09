@@ -73,3 +73,6 @@ fun main() {
     threads()
     coroutines()
 }
+
+//1.95 teme
+//8.55 lab
