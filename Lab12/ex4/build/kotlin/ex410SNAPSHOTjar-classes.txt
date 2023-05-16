@@ -1,0 +1,1 @@
+/home/heldigrad/Documents/PP/Lab12/ex4/build/classes/kotlin/main/MainKt$main$$inlined$vetoable$1.class:/home/heldigrad/Documents/PP/Lab12/ex4/build/classes/kotlin/main/MainKt.class
