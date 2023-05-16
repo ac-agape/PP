@@ -1,0 +1,1 @@
+/home/heldigrad/Documents/PP/Lab12/ex3/build/classes/kotlin/main/MainKt.class
