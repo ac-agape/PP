@@ -29,3 +29,10 @@ list2 = ['A', 'B', 'C', 'D']
 
 list3 = pair(list1, list2)
 print(tuple(list3))
+
+#ex4
+#n = int(input('n = '))
+n = 6
+var = (x ** 2 for x in range(n))
+filtered = list(filter(lambda x: x%2==0, var))
+print(filtered)
