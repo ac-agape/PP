@@ -1,4 +1,5 @@
 from sympy import isprime
+from functional import seq
 
 #ex1
 class int(int):
@@ -36,3 +37,17 @@ n = 6
 var = (x ** 2 for x in range(n))
 filtered = list(filter(lambda x: x%2==0, var))
 print(filtered)
+
+#ex5
+text = str("aaaaaabbbbbbbbbccccccc")
+
+result = (
+    seq(list(text))
+    .map(lambda a: (a, 1))
+    .reduce_by_key(lambda x, y: 0)
+    .map(lambda t: t[0])
+    .make_string("")
+)
+
+print(result)
+
