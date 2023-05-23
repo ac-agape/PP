@@ -16,7 +16,16 @@ class str(str):
         l = list(self.split(" "))
         return "".join(map(lambda x: x.capitalize(), l))
 
-if __name__ == '__main__':
-# se pot crea extensii DOAR pe clase custom
-    text = str("pushi este pisica mea mai crazy asa de fel")
-    print(text.toPascalCase())
+text = str("pushi este pisica mea mai crazy asa de fel")
+print(text.toPascalCase())
+
+#ex3
+def pair(str1, str2):
+    list = map(lambda x, y: (x, y), str1, str2)
+    return list
+
+list1 = ['a', 'b', 'c', 'd']
+list2 = ['A', 'B', 'C', 'D']
+
+list3 = pair(list1, list2)
+print(tuple(list3))
