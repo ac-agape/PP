@@ -44,10 +44,22 @@ text = str("aaaaaabbbbbbbbbccccccc")
 result = (
     seq(list(text))
     .map(lambda a: (a, 1))
-    .reduce_by_key(lambda x, y: 0)
+    .reduce_by_key(lambda x, y: x+y)
     .map(lambda t: t[0])
     .make_string("")
 )
 
 print(result)
 
+#ex6
+text = str("aaaabbbccd")
+
+result = (
+    seq(list(text))
+    .map(lambda a: (a, 1))
+    .reduce_by_key(lambda x, y: x + y)
+    .map(lambda t: t[0] + str(t[1]) if t[1] > 1 else t[0])
+    .make_string("")
+)
+
+print(result)
