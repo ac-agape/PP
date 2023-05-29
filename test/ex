@@ -1,0 +1,17 @@
+def ex3():
+    lists = (1, 21, 75, 39, 7, 2, 35, 3, 31, 7, 8)
+    a = filter(lambda x: x >= 5, lists)
+    print(f'a) {a}')
+
+    b = a.grouped(2)
+    print(f'b) {b}')
+
+    c = b.map(lambda l: l[0] * l[1])
+    print(f'c) {c}')
+
+    d = c.sum()
+    print(f'd) {d}')
+
+
+if __name__ == "__main__":
+    ex3()
